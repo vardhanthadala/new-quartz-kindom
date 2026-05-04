@@ -88,10 +88,10 @@ export default function HeroSection() {
         ref={scrollRef}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="text-white/40 text-[10px] uppercase tracking-[0.3em] font-medium">
+        {/* <span className="text-white/40 text-[10px] uppercase tracking-[0.3em] font-medium">
           Scroll
-        </span>
-        <div className="w-px h-8 bg-gradient-to-b from-white/40 to-transparent" />
+        </span> */}
+        {/* <div className="w-px h-8 bg-gradient-to-b from-white/40 to-transparent" /> */}
       </div>
     </section>
   );
