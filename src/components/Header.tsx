@@ -45,11 +45,7 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled || menuOpen
-          ? "bg-black/80 backdrop-blur-2xl border-b border-white/5"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-transparent`}
     >
       <div className="max-w-[1800px] mx-auto flex items-center justify-between px-6 sm:px-8 lg:px-12 xl:px-16 h-16 sm:h-20 relative z-50">
         {/* Logo */}
@@ -77,7 +73,7 @@ export default function Header() {
               key={link.label}
               href={link.href}
               onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-              className="text-[11px] font-bold tracking-[0.25em] uppercase text-white/40 hover:text-white transition-all duration-300"
+              className="text-[11px] font-bold tracking-[0.25em] uppercase text-white hover:text-white/70 drop-shadow-md transition-all duration-300"
             >
               {link.label}
             </a>
@@ -88,7 +84,7 @@ export default function Header() {
         <button
           aria-label="Toggle menu"
           onClick={() => setMenuOpen(!menuOpen)}
-          className={`flex flex-col justify-center items-center gap-[6px] w-10 h-10 md:hidden transition-transform active:scale-90 ${menuOpen ? "hamburger-open" : ""}`}
+          className={`flex flex-col justify-center items-center gap-[6px] w-10 h-10 md:hidden transition-transform active:scale-90 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg ${menuOpen ? "hamburger-open" : ""}`}
         >
           <span className={`hamburger-line h-[1.5px] w-6 bg-white`} />
           <span className={`hamburger-line h-[1.5px] w-6 bg-white`} />
