@@ -6,7 +6,6 @@ import gsap from "gsap";
 const NAV_LINKS = [
   { label: "Home", href: "#hero" },
   { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
   { label: "Products", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
@@ -85,24 +84,15 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Desktop CTA */}
-        <a
-          href="#contact"
-          onClick={(e) => { e.preventDefault(); handleNavClick("#contact"); }}
-          className="hidden md:inline-flex items-center px-6 py-2.5 rounded-full bg-white text-black text-[12px] font-bold uppercase tracking-widest hover:bg-white/90 transition-all shadow-xl shadow-black/20"
-        >
-          Get in Touch
-        </a>
-
         {/* Hamburger Toggle */}
         <button
           aria-label="Toggle menu"
           onClick={() => setMenuOpen(!menuOpen)}
           className={`flex flex-col justify-center items-center gap-[6px] w-10 h-10 md:hidden transition-transform active:scale-90 ${menuOpen ? "hamburger-open" : ""}`}
         >
-          <span className={`hamburger-line h-[1.5px] w-6 ${menuOpen ? "bg-white" : "bg-white"}`} />
-          <span className={`hamburger-line h-[1.5px] w-6 ${menuOpen ? "bg-white" : "bg-white"}`} />
-          <span className={`hamburger-line h-[1.5px] w-6 ${menuOpen ? "bg-white" : "bg-white"}`} />
+          <span className={`hamburger-line h-[1.5px] w-6 bg-white`} />
+          <span className={`hamburger-line h-[1.5px] w-6 bg-white`} />
+          <span className={`hamburger-line h-[1.5px] w-6 bg-white`} />
         </button>
       </div>
 
@@ -125,16 +115,6 @@ export default function Header() {
             </a>
           ))}
         </nav>
-        
-        <div className={`mt-16 transition-all duration-700 delay-300 transform ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}>
-          <a
-            href="#contact"
-            onClick={(e) => { e.preventDefault(); handleNavClick("#contact"); }}
-            className="px-10 py-4 rounded-full bg-white text-black text-sm font-bold uppercase tracking-[0.2em] shadow-2xl shadow-black/40"
-          >
-            Get in Touch
-          </a>
-        </div>
       </div>
     </header>
   );
