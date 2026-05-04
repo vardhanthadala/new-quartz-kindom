@@ -96,7 +96,7 @@ export default function Header() {
 
       {/* Mobile Menu Overlay - Outside header to avoid GSAP transform constraint */}
       <div
-        className={`fixed inset-0 bg-black/95 backdrop-blur-3xl z-40 flex flex-col items-center justify-center transition-all duration-500 ease-in-out md:hidden ${
+        className={`fixed inset-0 backdrop-blur-3xl z-40 flex flex-col items-center justify-center transition-all duration-500 ease-in-out md:hidden ${
           menuOpen ? "translate-y-0 opacity-100 pointer-events-auto" : "-translate-y-full opacity-0 pointer-events-none"
         }`}
       >
