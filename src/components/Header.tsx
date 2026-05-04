@@ -7,7 +7,7 @@ const NAV_LINKS = [
   { label: "Home", href: "#hero" },
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
-  { label: "Products", href: "#products" },
+  { label: "Products", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -46,39 +46,39 @@ export default function Header() {
   return (
     <header
       ref={headerRef}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
-        scrolled
-          ? "bg-black/60 backdrop-blur-xl border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.3)]"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled || menuOpen
+          ? "bg-black/80 backdrop-blur-2xl border-b border-white/5"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-[1800px] mx-auto flex items-center justify-between px-6 sm:px-8 lg:px-12 xl:px-16 h-16 sm:h-20">
+      <div className="max-w-[1800px] mx-auto flex items-center justify-between px-6 sm:px-8 lg:px-12 xl:px-16 h-16 sm:h-20 relative z-50">
         {/* Logo */}
         <a
           href="#hero"
           onClick={(e) => { e.preventDefault(); handleNavClick("#hero"); }}
-          className="relative z-50 flex items-center gap-2.5"
+          className="flex items-center gap-2.5 group"
         >
-          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center">
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center group-hover:bg-white/20 transition-all">
             <svg viewBox="0 0 24 24" className="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M12 2L2 7l10 5 10-5-10-5z" />
               <path d="M2 17l10 5 10-5" />
               <path d="M2 12l10 5 10-5" />
             </svg>
           </div>
-          <span className="text-lg sm:text-xl font-bold tracking-tight text-white">
-            QUARTZ
+          <span className="text-lg sm:text-xl font-bold tracking-tight text-white uppercase italic">
+            Quartz
           </span>
         </a>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8 lg:gap-10">
+        <nav className="hidden md:flex items-center gap-10">
           {NAV_LINKS.map((link) => (
             <a
               key={link.label}
               href={link.href}
               onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-              className="text-[13px] font-medium tracking-wide uppercase text-white/60 hover:text-white transition-colors duration-300"
+              className="text-[11px] font-bold tracking-[0.25em] uppercase text-white/40 hover:text-white transition-all duration-300"
             >
               {link.label}
             </a>
@@ -89,49 +89,52 @@ export default function Header() {
         <a
           href="#contact"
           onClick={(e) => { e.preventDefault(); handleNavClick("#contact"); }}
-          className="hidden md:inline-flex items-center px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-semibold hover:bg-white/20 transition-all duration-300"
+          className="hidden md:inline-flex items-center px-6 py-2.5 rounded-full bg-white text-black text-[12px] font-bold uppercase tracking-widest hover:bg-white/90 transition-all shadow-xl shadow-black/20"
         >
           Get in Touch
         </a>
 
-        {/* Hamburger */}
+        {/* Hamburger Toggle */}
         <button
           aria-label="Toggle menu"
           onClick={() => setMenuOpen(!menuOpen)}
-          className={`relative z-50 flex flex-col justify-center items-center gap-[6px] w-10 h-10 md:hidden ${menuOpen ? "hamburger-open" : ""}`}
+          className={`flex flex-col justify-center items-center gap-[6px] w-10 h-10 md:hidden transition-transform active:scale-90 ${menuOpen ? "hamburger-open" : ""}`}
         >
-          <span className="hamburger-line" />
-          <span className="hamburger-line" />
-          <span className="hamburger-line" />
+          <span className={`hamburger-line h-[1.5px] w-6 ${menuOpen ? "bg-white" : "bg-white"}`} />
+          <span className={`hamburger-line h-[1.5px] w-6 ${menuOpen ? "bg-white" : "bg-white"}`} />
+          <span className={`hamburger-line h-[1.5px] w-6 ${menuOpen ? "bg-white" : "bg-white"}`} />
         </button>
       </div>
 
-      {/* Mobile Overlay */}
+      {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 bg-black/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center transition-all duration-500 md:hidden ${
-          menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        className={`fixed inset-0 bg-black/95 backdrop-blur-3xl z-40 flex flex-col items-center justify-center transition-all duration-500 ease-in-out md:hidden ${
+          menuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
         }`}
       >
-        <nav className="flex flex-col items-center gap-8">
+        <nav className="flex flex-col items-center gap-10">
           {NAV_LINKS.map((link, i) => (
             <a
               key={link.label}
               href={link.href}
               onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-              className="text-3xl sm:text-4xl font-light text-white tracking-tight hover:text-white/60 transition-colors"
-              style={{ transitionDelay: `${i * 50}ms` }}
+              className={`text-4xl font-light text-white tracking-tighter hover:text-white/60 transition-all transform ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
+              style={{ transitionDelay: `${i * 75}ms`, transitionDuration: "600ms" }}
             >
               {link.label}
             </a>
           ))}
         </nav>
-        <a
-          href="#contact"
-          onClick={(e) => { e.preventDefault(); handleNavClick("#contact"); }}
-          className="mt-12 px-8 py-3 rounded-full bg-white/10 border border-white/20 text-white text-base font-semibold hover:bg-white/20 transition-colors"
-        >
-          Get in Touch
-        </a>
+        
+        <div className={`mt-16 transition-all duration-700 delay-300 transform ${menuOpen ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}>
+          <a
+            href="#contact"
+            onClick={(e) => { e.preventDefault(); handleNavClick("#contact"); }}
+            className="px-10 py-4 rounded-full bg-white text-black text-sm font-bold uppercase tracking-[0.2em] shadow-2xl shadow-black/40"
+          >
+            Get in Touch
+          </a>
+        </div>
       </div>
     </header>
   );
